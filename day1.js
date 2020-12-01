@@ -8,7 +8,7 @@ let first = 0
 let second = 0
 for (let i = 0; i < input.length; i++) {
     first = input[i]
-    const numero = 2020 - parseInt(first)
+    const numero = 2020 - first
     if(input.includes(numero)){
         second = numero
         console.log("found it")
@@ -27,8 +27,8 @@ for (let i = 0; i < input.length; i++) {
         break
     }
     for (let j = i + 1; j < input.length; j++) {
-        first = parseInt(input[i])
-        second = parseInt(input[j])
+        first = input[i]
+        second = input[j]
         const sum = first + second
         const numero = 2020 - sum
         if(input.includes(numero)){
