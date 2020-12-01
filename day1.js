@@ -36,6 +36,6 @@ for (let i = 0; i < input.length; i++) {
             console.log("found it")
             break;
         }
-  }
+    }
 }
 console.log(first * second * third)
