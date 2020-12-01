@@ -2,14 +2,14 @@
 import fs from 'fs';
 
 
-const input = fs.readFileSync('./input1.txt' , { encoding:'utf8' }).toString().split('\n')
+const input = fs.readFileSync('./input1.txt' , { encoding:'utf8' }).toString().split('\r\n')
 
 let first = 0
 let second = 0
 for (let i = 0; i < input.length; i++) {
     first = input[i]
     const numero = 2020 - parseInt(first)
-    if(input.includes(`${String(numero)}\r`)){
+    if(input.includes(`${String(numero)}`)){
         second = numero
         console.log("found it")
         break;
@@ -18,7 +18,7 @@ for (let i = 0; i < input.length; i++) {
 
 console.log(parseInt(first) * parseInt(second))
 
-//part 2
+// part 2
 let first = 0
 let second = 0
 let third = 0
@@ -31,7 +31,7 @@ for (let i = 0; i < input.length; i++) {
         second = parseInt(input[j])
         const sum = first + second
         const numero = 2020 - sum
-        if(input.includes(`${String(numero)}\r`)){
+        if(input.includes(`${String(numero)}`)){
             third = numero
             console.log("found it")
             break;
