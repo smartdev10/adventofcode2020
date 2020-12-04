@@ -28,7 +28,7 @@ for (let i = 0; i < input.length; i++) {
    const instance = line[1].split(':')[0]
 
    const indices = [];
-   for(let i=0; i<password.length;i++) {
+   for(let i=0; i < password.length;i++) {
         if (password[i] === instance) indices.push(i + 1);
    }
    if(indices.indexOf(parseInt(policy[0])) !== -1 && indices.indexOf(parseInt(policy[1])) !== -1){
