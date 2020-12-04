@@ -54,9 +54,11 @@ function Validator(item){
        case 'ecl':
            res = ['amb' ,'blu', 'brn', 'gry' ,'grn', 'hzl' , 'oth'].indexOf(value) !== -1
            break
-       case 'pid':
-           res = value.length === 9
-           break
+       case 'pid':{
+            const regex = RegExp('^[0-9]{9}$','gi');
+            res = regex.test(value)
+            break
+       }
        default :
            res = true
     }
