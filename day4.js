@@ -12,13 +12,13 @@ const fields =  [
     'ecl',
     'pid',
 ]
-// let count = 0
-// for (const pass of passports ) {
-//     if( fields.every(filed => pass.indexOf(filed) !== -1)){
-//         count++
-//     }
-// }
-// console.log(count)
+let count = 0
+for (const pass of passports ) {
+    if( fields.every(filed => pass.indexOf(filed) !== -1)){
+        count++
+    }
+}
+console.log(count)
 // Part 2
 
 function Validator(item){
