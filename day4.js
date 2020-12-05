@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const passports  = fs.readFileSync('./input4.txt' , { encoding:'utf8' }).toString().split(/\n\s*\n/)
+let passports  = fs.readFileSync('./input4.txt','utf8').toString().split(/\n\n/)
 
 // // Part 1
 const fields =  [
@@ -22,56 +22,50 @@ const fields =  [
 // Part 2
 
 function Validator(item){
-    let res = false
-    const field = item.split(':')[0]
-    const value = item.split(':')[1]
+    const [field,value] = item.split(':')
     switch(field){
        case 'byr':
-           res = value.length === 4 && parseInt(value) >= 1920 &&  parseInt(value) <= 2020
-           break
+           return value.length === 4 && (parseInt(value) >= 1920 &&  parseInt(value) <= 2002)
        case 'iyr':
-           res = value.length === 4 && parseInt(value) >= 2010 &&  parseInt(value) <= 2020
-           break
+           return value.length === 4 && (parseInt(value) >= 2010 &&  parseInt(value) <= 2020)
        case 'eyr':
-           res = value.length === 4 && parseInt(value) >= 2020 &&  parseInt(value) <= 2030
-           break
+           return value.length === 4 && (parseInt(value) >= 2020 &&  parseInt(value) <= 2030)
        case 'hgt':{
-            const regex = RegExp('^([0-9]{2,3})(cm|in)$','gi');
-            if(regex.test(value)){
+            const regex = RegExp('^([0-9]{2,3})(cm|in)$','g');
+            if(value.match(regex) !== null){
                 const regex = RegExp('^([0-9]{2,3})','g');
                 const regex2 = RegExp('(cm|in)$','g');
                 const number = parseInt(value.match(regex)[0])
                 const unit = value.match(regex2)[0]
-                console.log(number,unit)
-                res = unit === 'cm' ? number >= 150 && number <= 193 : unit === 'in' ? number >= 59 && number <= 76 : false
+                if(unit === 'cm'){
+                    return (number >= 150 && number <= 193)
+                }else if(unit === 'in'){
+                    return (number >= 59 && number <= 76)
+                }
+                return false
             }
-            break
+            return false
        }
        case 'hcl':
-           const regex = RegExp('^#[0-9-a-f]{6}$','gi');
-           res = regex.test(value)
-           break
+           const regex = RegExp('^#[0-9a-f]{6}','g');
+           return value.match(regex) !== null
        case 'ecl':
-           res = ['amb' ,'blu', 'brn', 'gry' ,'grn', 'hzl' , 'oth'].indexOf(value) !== -1
-           break
+           return ['amb' ,'blu', 'brn', 'gry' ,'grn', 'hzl' , 'oth'].includes(value)
        case 'pid':{
-            const regex = RegExp('^[0-9]{9}$','gi');
-            res = regex.test(value)
-            break
+            return value.length === 9 && !isNaN(Number(value))
        }
        default :
-           res = true
+           return true
     }
-    return res
 }
 
-let re1 = RegExp(/[a-z]+:[a-z0-9#]+/,'gi');
+let re1 = RegExp(/[a-z]{3}:[a-z0-9#]+/,'gi');
 let count = 0
-for (const passport of passports ) {
-    if(fields.every(field => passport.indexOf(field) !== -1)){
-        if(passport.match(re1).every(Validator)){
-            count++
-        }
-    }
+passports = passports.filter((pass)=> fields.every(field => pass.indexOf(field) !== -1))
+console.log(passports.length)
+for (const passport of passports)  {
+   if(passport.match(re1).every(Validator)){
+      count++
+   }
 }
 console.log(count)
