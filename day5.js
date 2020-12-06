@@ -29,6 +29,7 @@ for (const data of input) {
    boardingPass.push((endRow * 8) + endCol)
 }
 
+console.log(Math.max(...boardingPass))
 
 
 // part 2
