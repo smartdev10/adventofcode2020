@@ -1,7 +1,6 @@
 import fs from 'fs';
-
-let groups  = fs.readFileSync('./input6.txt','utf8')
-                .toString().split(/\n\s*\n/)
+let file  = fs.readFileSync('./input6.txt','utf8')
+let groups  = file.toString().split(/\n\s*\n/)
                 .map(grp => grp.split(/\n/).join(""))
                 .map(grp => [...new Set([...grp.split("").join("").replace(/\r/g, "")])])
 
@@ -14,9 +13,9 @@ console.log(total);
 
 
 // Part 2
-groups  = fs.readFileSync('./input6.txt','utf8')
-                .toString().split(/\n\s*\n/)
-                .map(grp => grp.split(/\n/).map(str => str.replace(/\r/g, "")).map(str => str.split('').sort()))
+groups  = file.toString().split(/\n\s*\n/)
+              .map(grp => grp.split(/\n/)
+              .map(str => str.replace(/\r/g, "")).map(str => str.split('').sort()))
 let total2 = 0;
 let answers = new Set()
 for (const grp of groups) {
